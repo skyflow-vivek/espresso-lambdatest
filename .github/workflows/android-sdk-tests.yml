@@ -1,0 +1,40 @@
+name: Sample espresso tests on lambda test
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  android-sdk-sandbox-integration-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        device: ["Galaxy S23 Ultra-13", "Galaxy S24 Ultra-13", "Xioami Note 13 Pro-13"]
+
+    steps:
+      - name: Chceckout Repo
+        uses: actions/checkout@v2
+
+      - name: Run tests on lambda test
+        run: |
+          curl --location --request POST 'https://mobile-api.lambdatest.com/framework/v1/espresso/build' \
+          --header 'Authorization: Basic ${{ secrets.BASIC_AUTH_TOKEN }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "app" : ${{ secrets.APP_URL }},
+              "testSuite": ${{ secrets.TEST_APP_URL }},
+              "device" :  [ ${{ matrix.device }} ],
+              "queueTimeout": 10800,
+              "IdleTimeout": 150,
+              "deviceLog": true,
+              "network": false,
+              "build" : "Proverbial-Espresso-${{ matrix.device }}"
+          }'
