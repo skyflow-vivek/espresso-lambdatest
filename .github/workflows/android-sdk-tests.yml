@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - master
-  
+
   workflow_dispatch:
 
 env:
@@ -17,7 +17,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        device: ["Galaxy S23 Ultra-13", "Galaxy S24 Ultra-13", "Xioami Note 13 Pro-13"]
+        device:
+          [
+            "Galaxy S23 Ultra-13",
+            "Galaxy S24 Ultra-13",
+            "Xioami Note 13 Pro-13",
+          ]
 
     steps:
       - name: Chceckout Repo
