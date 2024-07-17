@@ -30,16 +30,4 @@ jobs:
 
       - name: Run tests on lambda test
         run: |
-          curl --location --request POST 'https://mobile-api.lambdatest.com/framework/v1/espresso/build' \
-          --header 'Authorization: Basic ${{ secrets.BASIC_AUTH_TOKEN }}' \
-          --header 'Content-Type: application/json' \
-          --data-raw '{
-              "app" : ${{ secrets.APP_URL }},
-              "testSuite": ${{ secrets.TEST_APP_URL }},
-              "device" :  [ ${{ matrix.device }} ],
-              "queueTimeout": 10800,
-              "IdleTimeout": 150,
-              "deviceLog": true,
-              "network": false,
-              "build" : "Proverbial-Espresso-${{ matrix.device }}"
-          }'
+          curl --location --request POST 'https://mobile-api.lambdatest.com/framework/v1/espresso/build' --header 'Authorization: Basic ${{ secrets.BASIC_AUTH_TOKEN }}' --header 'Content-Type: application/json' --data-raw '{"app" : ${{ secrets.APP_URL }},"testSuite": ${{ secrets.TEST_APP_URL }},"device" :  [ ${{ matrix.device }} ],"queueTimeout": 10800,"IdleTimeout": 150,"deviceLog": true,"network": false,"build" : "Proverbial-Espresso-${{ matrix.device }}"}'
