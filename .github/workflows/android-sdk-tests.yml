@@ -20,8 +20,8 @@ jobs:
         device:
           [
             "Galaxy S23 Ultra-13",
-            "Galaxy S24 Ultra-13",
-            "Xioami Note 13 Pro-13",
+            "Galaxy S24 Ultra-14",
+            "Redmi Note 13 Pro-13",
           ]
 
     steps:
